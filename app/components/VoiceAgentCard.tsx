@@ -44,7 +44,18 @@ export default function VoiceAgentCard({
     try {
       setError(null);
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      await conversation.startSession({ agentId, connectionType: "websocket" });
+      await conversation.startSession({
+        agentId,
+        connectionType: "websocket",
+        overrides: {
+          agent: {
+            language: lang,
+            ...(lang === "es" && {
+              firstMessage: "¡Hola! Soy el asistente virtual de Rootstack Bank. ¿En qué puedo ayudarte hoy?",
+            }),
+          },
+        },
+      });
     } catch {
       setError(tr(t.card.micError, lang));
     }
