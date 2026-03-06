@@ -55,104 +55,84 @@ export default function VoiceAgentCard({
   }, [conversation]);
 
   return (
-    <div style={{
-      backgroundColor: "#1a1a1a",
-      border: "1px solid rgba(255,255,255,0.1)",
-      borderRadius: 16,
-      overflow: "hidden",
-      width: "100%",
-      maxWidth: 420,
-      boxShadow: "0 24px 60px rgba(0,0,0,0.6)",
-    }}>
+    <div className="bg-surface border border-white/10 rounded-2xl overflow-hidden w-full max-w-[420px] shadow-[0_24px_60px_rgba(0,0,0,0.6)]">
+
       {/* Header */}
-      <div style={{
-        background: "linear-gradient(135deg, #0f1f0f 0%, #0a1a0a 50%, #0d1a0d 100%)",
-        borderBottom: "1px solid rgba(241,225,4,0.15)",
-        padding: "20px 24px",
-        position: "relative",
-        overflow: "hidden",
-      }}>
-        <div style={{
-          position: "absolute", top: -20, right: -20,
-          width: 120, height: 120,
-          background: "radial-gradient(circle, rgba(7,241,218,0.12) 0%, transparent 70%)",
-          borderRadius: "50%", pointerEvents: "none",
-        }}/>
-        <div style={{ display: "flex", alignItems: "center", gap: 12, position: "relative" }}>
-          <span style={{ fontSize: 32 }}>{icon}</span>
+      <div className="bg-gradient-to-br from-[#0f1f0f] via-[#0a1a0a] to-[#0d1a0d] border-b border-[rgba(241,225,4,0.15)] py-5 px-6 relative overflow-hidden">
+        <div className="absolute -top-5 -right-5 w-[120px] h-[120px] bg-[radial-gradient(circle,rgba(7,241,218,0.12)_0%,transparent_70%)] rounded-full pointer-events-none" />
+        <div className="flex items-center gap-3 relative">
+          <span className="text-[32px]">{icon}</span>
           <div>
-            <p style={{ color: "#07F1DA", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 2 }}>
+            <p className="text-brand-teal text-[11px] font-bold tracking-[0.1em] uppercase mb-0.5">
               {subtitle}
             </p>
-            <h3 style={{ color: "#fff", fontSize: 18, fontWeight: 800, lineHeight: 1.2 }}>{title}</h3>
+            <h3 className="text-white text-[18px] font-extrabold leading-tight">{title}</h3>
           </div>
         </div>
       </div>
 
       {/* Body */}
-      <div style={{ padding: "24px", display: "flex", flexDirection: "column", gap: 18 }}>
-        <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 14, lineHeight: 1.65 }}>
+      <div className="p-6 flex flex-col gap-[18px]">
+        <p className="text-white/55 text-sm leading-[1.65]">
           {description}
         </p>
 
         {/* Capabilities */}
-        <ul style={{ display: "flex", flexDirection: "column", gap: 9, listStyle: "none", padding: 0, margin: 0 }}>
-          {capabilities.map((cap) => (
-            <li key={cap} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, color: "rgba(255,255,255,0.85)" }}>
-              <span style={{
-                width: 18, height: 18, borderRadius: "50%", flexShrink: 0,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 10, fontWeight: 800,
-                backgroundColor: "rgba(241,225,4,0.12)",
-                color: "#F1E104",
-                border: "1px solid rgba(241,225,4,0.3)",
-              }}>✓</span>
-              {cap}
-            </li>
-          ))}
-        </ul>
+        {capabilities.length > 0 && (
+          <ul className="flex flex-col gap-[9px] list-none p-0 m-0">
+            {capabilities.map((cap) => (
+              <li key={cap} className="flex items-center gap-[10px] text-[13.5px] text-white/85">
+                <span className="w-[18px] h-[18px] rounded-full shrink-0 flex items-center justify-center text-[10px] font-extrabold bg-[rgba(241,225,4,0.12)] text-accent border border-[rgba(241,225,4,0.3)]">
+                  ✓
+                </span>
+                {cap}
+              </li>
+            ))}
+          </ul>
+        )}
 
         {/* See details link */}
         {detailsUrl && (
           <Link
             href={detailsUrl}
-            style={{
-              color: "#07F1DA", fontSize: 13, fontWeight: 600,
-              textDecoration: "none", letterSpacing: "0.01em",
-            }}
+            className="text-brand-teal text-[13px] font-semibold no-underline tracking-[0.01em]"
           >
             {tr(t.card.seeDetails, lang)}
           </Link>
         )}
 
         {/* Divider */}
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }} />
+        <div className="border-t border-white/[0.08]" />
 
         {/* Status */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, height: 20 }}>
+        <div className="flex items-center gap-2 h-5">
           {isConnected && (
             <>
-              <div style={{ display: "flex", alignItems: "center", gap: 3, height: "100%" }}>
+              <div className="flex items-center gap-[3px] h-full">
                 {[...Array(5)].map((_, i) => (
-                  <div key={i} className="wave-bar" style={{
-                    width: 3, height: "100%", borderRadius: 3,
-                    backgroundColor: isSpeaking ? "#F1E104" : "rgba(255,255,255,0.25)",
-                    boxShadow: isSpeaking ? "0 0 6px rgba(241,225,4,0.6)" : "none",
-                  }}/>
+                  <div
+                    key={i}
+                    className={[
+                      "wave-bar w-[3px] h-full rounded-[3px]",
+                      isSpeaking
+                        ? "bg-accent shadow-[0_0_6px_rgba(241,225,4,0.6)]"
+                        : "bg-white/25",
+                    ].join(" ")}
+                  />
                 ))}
               </div>
-              <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}>
+              <span className="text-white/50 text-xs">
                 {isSpeaking ? tr(t.card.status.speaking, lang) : tr(t.card.status.listening, lang)}
               </span>
             </>
           )}
           {isConnecting && (
-            <span style={{ color: "rgba(255,255,255,0.4)", fontSize: 12, fontStyle: "italic" }}>
+            <span className="text-white/40 text-xs italic">
               {tr(t.card.status.connecting, lang)}
             </span>
           )}
           {isIdle && (
-            <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 12 }}>
+            <span className="text-white/30 text-xs">
               {tr(t.card.status.idle, lang)}
             </span>
           )}
@@ -160,38 +140,30 @@ export default function VoiceAgentCard({
 
         {/* Error */}
         {error && (
-          <p style={{
-            fontSize: 12, color: "#f87171",
-            backgroundColor: "rgba(239,68,68,0.1)",
-            border: "1px solid rgba(239,68,68,0.2)",
-            borderRadius: 8, padding: "8px 12px",
-          }}>{error}</p>
+          <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg py-2 px-3">
+            {error}
+          </p>
         )}
 
         {/* Button */}
         {isConnected ? (
-          <button onClick={endCall} style={{
-            width: "100%", padding: "13px 0",
-            backgroundColor: "rgba(239,68,68,0.12)",
-            color: "#f87171",
-            border: "1px solid rgba(239,68,68,0.3)",
-            borderRadius: 8, fontSize: 14, fontWeight: 700,
-            cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-          }}>
+          <button
+            onClick={endCall}
+            className="w-full py-[13px] bg-red-500/[0.12] text-red-400 border border-red-500/30 rounded-lg text-sm font-bold cursor-pointer flex items-center justify-center gap-2"
+          >
             <span>📵</span> {tr(t.card.endCall, lang)}
           </button>
         ) : (
-          <button onClick={startCall} disabled={isConnecting} style={{
-            width: "100%", padding: "13px 0",
-            backgroundColor: isConnecting ? "rgba(241,225,4,0.1)" : "#F1E104",
-            color: isConnecting ? "#F1E104" : "#0d0d0d",
-            border: isConnecting ? "1px solid rgba(241,225,4,0.3)" : "none",
-            borderRadius: 8, fontSize: 15, fontWeight: 800,
-            cursor: isConnecting ? "not-allowed" : "pointer",
-            opacity: isConnecting ? 0.7 : 1,
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-            boxShadow: isConnecting ? "none" : "0 0 24px rgba(241,225,4,0.25)",
-          }}>
+          <button
+            onClick={startCall}
+            disabled={isConnecting}
+            className={[
+              "w-full py-[13px] rounded-lg text-[15px] font-extrabold flex items-center justify-center gap-2",
+              isConnecting
+                ? "bg-[rgba(241,225,4,0.1)] text-accent border border-[rgba(241,225,4,0.3)] cursor-not-allowed opacity-70"
+                : "bg-accent text-dark cursor-pointer shadow-[0_0_24px_rgba(241,225,4,0.25)]",
+            ].join(" ")}
+          >
             {isConnecting
               ? <><span>⏳</span> {tr(t.card.status.connecting, lang)}</>
               : <><span>📞</span> {tr(t.card.startCall, lang)}</>

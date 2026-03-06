@@ -41,7 +41,7 @@ export const t = {
     seeDetails: { es: "Ver detalles del agente →", en: "See agent details →" },
   },
   footer: {
-    rights: { es: "© 2025 Rootlenses. Todos los derechos reservados.", en: "© 2025 Rootlenses. All rights reserved." },
+    rights: { es: "© 2026 Rootlenses. Todos los derechos reservados.", en: "© 2026 Rootlenses. All rights reserved." },
     env: { es: "Entorno de demostración", en: "Demo environment" },
   },
   agentPage: {

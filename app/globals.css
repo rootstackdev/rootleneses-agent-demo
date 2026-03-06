@@ -1,31 +1,44 @@
 @import "tailwindcss";
 
+/* ── Brand color utilities ─────────────────────────────────────────────── */
+@layer utilities {
+  .bg-dark       { background-color: #0d0d0d; }
+  .text-dark      { color: #0d0d0d; }
+  .bg-surface     { background-color: #1a1a1a; }
+  .bg-surface-2   { background-color: #161616; }
+  .bg-accent      { background-color: #F1E104; }
+  .text-accent    { color: #F1E104; }
+  .border-accent  { border-color: #F1E104; }
+  .text-brand-teal  { color: #07F1DA; }
+  .border-brand-teal { border-color: #07F1DA; }
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
 html, body {
   background-color: #0d0d0d !important;
   color: #ffffff;
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
+/* ── Animations ─────────────────────────────────────────────────────────── */
 @keyframes wave-bar {
   0%, 100% { transform: scaleY(0.25); }
-  50% { transform: scaleY(1); }
+  50%       { transform: scaleY(1); }
 }
 
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.wave-bar {
-  animation: wave-bar 0.85s ease-in-out infinite;
-}
+.wave-bar { animation: wave-bar 0.85s ease-in-out infinite; }
 .wave-bar:nth-child(1) { animation-delay: 0s; }
 .wave-bar:nth-child(2) { animation-delay: 0.12s; }
 .wave-bar:nth-child(3) { animation-delay: 0.24s; }
 .wave-bar:nth-child(4) { animation-delay: 0.36s; }
 .wave-bar:nth-child(5) { animation-delay: 0.48s; }
 
-.fade-in-up   { animation: fade-in-up 0.55s ease-out both; }
-.delay-100    { animation-delay: 0.1s; }
-.delay-200    { animation-delay: 0.2s; }
-.delay-300    { animation-delay: 0.32s; }
+.fade-in-up { animation: fade-in-up 0.55s ease-out both; }
+.delay-100  { animation-delay: 0.1s; }
+.delay-200  { animation-delay: 0.2s; }
+.delay-300  { animation-delay: 0.32s; }

@@ -7,6 +7,7 @@ import { t, tr } from "../../translations";
 
 const AGENT_ID = process.env.NEXT_PUBLIC_AGENT_ID_ROOTSTACK!;
 
+// Dynamic category colors stay as inline styles — values depend on runtime data
 const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
   Cuenta:        { bg: "rgba(241,225,4,0.08)",   text: "#F1E104", border: "rgba(241,225,4,0.25)" },
   Account:       { bg: "rgba(241,225,4,0.08)",   text: "#F1E104", border: "rgba(241,225,4,0.25)" },
@@ -30,45 +31,35 @@ export default function RootstackBankPage() {
   const steps = t.agentPage.steps[lang];
 
   return (
-    <div style={{ backgroundColor: "#0d0d0d", minHeight: "100vh", color: "#fff" }}>
+    <div className="bg-dark min-h-screen text-white">
       <Nav />
 
       {/* ── Hero / Header ── */}
-      <section style={{
-        background: "linear-gradient(180deg, #0f1f0f 0%, #0d0d0d 100%)",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
-        padding: "56px 24px 48px",
-      }}>
-        <div style={{ maxWidth: 1120, margin: "0 auto" }}>
-          <a href="/" style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, textDecoration: "none", display: "inline-block", marginBottom: 28 }}>
+      <section className="bg-[linear-gradient(180deg,#0f1f0f_0%,#0d0d0d_100%)] border-b border-white/[0.08] pt-14 pb-12 px-6">
+        <div className="max-w-[1120px] mx-auto">
+          <a href="/" className="text-white/40 text-[13px] no-underline inline-block mb-7">
             {tr(t.agentPage.back, lang)}
           </a>
 
-          <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", flexWrap: "wrap", gap: 32 }}>
-            <div style={{ maxWidth: 560 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                <span style={{ fontSize: 40 }}>🏦</span>
+          <div className="flex items-start justify-between flex-wrap gap-8">
+            <div className="max-w-[560px]">
+              <div className="flex items-center gap-[10px] mb-4">
+                <span className="text-[40px]">🏦</span>
                 <div>
-                  <p style={{ color: "#07F1DA", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 2 }}>
+                  <p className="text-brand-teal text-[11px] font-bold tracking-[0.1em] uppercase mb-0.5">
                     {tr(t.agentPage.subtitle, lang)}
                   </p>
-                  <h1 style={{ color: "#fff", fontSize: 32, fontWeight: 800, lineHeight: 1.15 }}>
+                  <h1 className="text-white text-[32px] font-extrabold leading-[1.15]">
                     {tr(t.agentPage.title, lang)}
                   </h1>
                 </div>
               </div>
 
-              <span style={{
-                display: "inline-block", marginBottom: 20,
-                backgroundColor: "rgba(241,225,4,0.1)", color: "#F1E104",
-                border: "1px solid rgba(241,225,4,0.25)",
-                fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
-                padding: "4px 12px", borderRadius: 20,
-              }}>
+              <span className="inline-block mb-5 bg-[rgba(241,225,4,0.1)] text-accent border border-[rgba(241,225,4,0.25)] text-[11px] font-bold tracking-[0.08em] uppercase py-1 px-3 rounded-[20px]">
                 {tr(t.agentPage.badge, lang)}
               </span>
 
-              <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 15, lineHeight: 1.7 }}>
+              <p className="text-white/60 text-[15px] leading-[1.7]">
                 {tr(t.agentPage.description, lang)}
               </p>
             </div>
@@ -76,40 +67,31 @@ export default function RootstackBankPage() {
         </div>
       </section>
 
-      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "56px 24px 80px", display: "flex", flexDirection: "column", gap: 72 }}>
+      <div className="max-w-[1120px] mx-auto px-6 pt-14 pb-20 flex flex-col gap-[72px]">
 
         {/* ── Two-col: capabilities + call card ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 400px", gap: 48, alignItems: "start" }}>
+        <div className="grid grid-cols-[1fr_400px] gap-12 items-start">
 
           {/* Capabilities */}
           <div>
-            <h2 style={{ color: "#fff", fontSize: 22, fontWeight: 800, marginBottom: 24 }}>
+            <h2 className="text-white text-[22px] font-extrabold mb-6">
               {tr(t.agentPage.capabilitiesTitle, lang)}
             </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+            <div className="grid grid-cols-2 gap-[10px]">
               {capabilities.map((cap, i) => (
-                <div key={i} style={{
-                  backgroundColor: "#1a1a1a",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  borderRadius: 10, padding: "14px 16px",
-                  display: "flex", alignItems: "flex-start", gap: 10,
-                }}>
-                  <span style={{
-                    width: 20, height: 20, borderRadius: "50%", flexShrink: 0, marginTop: 1,
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 10, fontWeight: 800,
-                    backgroundColor: "rgba(241,225,4,0.12)", color: "#F1E104",
-                    border: "1px solid rgba(241,225,4,0.3)",
-                  }}>✓</span>
-                  <span style={{ color: "rgba(255,255,255,0.8)", fontSize: 13.5, lineHeight: 1.45 }}>{cap}</span>
+                <div key={i} className="bg-surface border border-white/[0.08] rounded-[10px] py-[14px] px-4 flex items-start gap-[10px]">
+                  <span className="w-5 h-5 rounded-full shrink-0 mt-[1px] flex items-center justify-center text-[10px] font-extrabold bg-[rgba(241,225,4,0.12)] text-accent border border-[rgba(241,225,4,0.3)]">
+                    ✓
+                  </span>
+                  <span className="text-white/80 text-[13.5px] leading-[1.45]">{cap}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Call card — sticky */}
-          <div style={{ position: "sticky", top: 80 }}>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 13, marginBottom: 12, fontWeight: 600 }}>
+          <div className="sticky top-20">
+            <p className="text-white/50 text-[13px] mb-3 font-semibold">
               {tr(t.agentPage.callTitle, lang)}
             </p>
             <VoiceAgentCard
@@ -121,7 +103,7 @@ export default function RootstackBankPage() {
               description={tr(t.agentPage.callDesc, lang)}
               capabilities={[]}
             />
-            <p style={{ color: "rgba(255,255,255,0.25)", fontSize: 11, marginTop: 10, lineHeight: 1.5, textAlign: "center" }}>
+            <p className="text-white/25 text-[11px] mt-[10px] leading-[1.5] text-center">
               🔒 {tr(t.agentPage.safetyNote, lang)}
             </p>
           </div>
@@ -129,31 +111,25 @@ export default function RootstackBankPage() {
 
         {/* ── Sample questions ── */}
         <div>
-          <h2 style={{ color: "#fff", fontSize: 22, fontWeight: 800, marginBottom: 8 }}>
+          <h2 className="text-white text-[22px] font-extrabold mb-2">
             {tr(t.agentPage.questionsTitle, lang)}
           </h2>
-          <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, marginBottom: 28 }}>
+          <p className="text-white/40 text-sm mb-7">
             {lang === "es" ? "Estas son algunas cosas que puedes decirle al agente:" : "Here are some things you can say to the agent:"}
           </p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 12 }}>
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-3">
             {questions.map((item, i) => {
               const c = categoryColors[item.category] ?? categoryColors["General"];
               return (
-                <div key={i} style={{
-                  backgroundColor: "#1a1a1a",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  borderRadius: 10, padding: "14px 16px",
-                  display: "flex", flexDirection: "column", gap: 8,
-                }}>
-                  <span style={{
-                    alignSelf: "flex-start",
-                    backgroundColor: c.bg, color: c.text,
-                    border: `1px solid ${c.border}`,
-                    fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
-                    padding: "3px 8px", borderRadius: 20,
-                  }}>{item.category}</span>
-                  <p style={{ color: "rgba(255,255,255,0.85)", fontSize: 14, lineHeight: 1.45, margin: 0 }}>
-                    "{item.q}"
+                <div key={i} className="bg-surface border border-white/[0.08] rounded-[10px] py-[14px] px-4 flex flex-col gap-2">
+                  <span
+                    className="self-start text-[10px] font-bold tracking-[0.06em] uppercase py-[3px] px-2 rounded-[20px]"
+                    style={{ backgroundColor: c.bg, color: c.text, border: `1px solid ${c.border}` }}
+                  >
+                    {item.category}
+                  </span>
+                  <p className="text-white/85 text-sm leading-[1.45] m-0">
+                    &ldquo;{item.q}&rdquo;
                   </p>
                 </div>
               );
@@ -163,21 +139,17 @@ export default function RootstackBankPage() {
 
         {/* ── How it works ── */}
         <div>
-          <h2 style={{ color: "#fff", fontSize: 22, fontWeight: 800, marginBottom: 32 }}>
+          <h2 className="text-white text-[22px] font-extrabold mb-8">
             {tr(t.agentPage.howItWorksTitle, lang)}
           </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+          <div className="grid grid-cols-3 gap-5">
             {steps.map((step) => (
-              <div key={step.n} style={{
-                backgroundColor: "#1a1a1a",
-                border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: 12, padding: "24px",
-              }}>
-                <span style={{ color: "#F1E104", fontSize: 28, fontWeight: 900, display: "block", marginBottom: 12, opacity: 0.9 }}>
+              <div key={step.n} className="bg-surface border border-white/[0.08] rounded-xl p-6">
+                <span className="text-accent text-[28px] font-black block mb-3 opacity-90">
                   {step.n}
                 </span>
-                <h3 style={{ color: "#fff", fontSize: 16, fontWeight: 700, marginBottom: 8 }}>{step.title}</h3>
-                <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, lineHeight: 1.6 }}>{step.desc}</p>
+                <h3 className="text-white text-base font-bold mb-2">{step.title}</h3>
+                <p className="text-white/50 text-sm leading-[1.6]">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -185,10 +157,10 @@ export default function RootstackBankPage() {
       </div>
 
       {/* Footer */}
-      <footer style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-        <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 24px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ color: "rgba(255,255,255,0.25)", fontSize: 12 }}>{tr(t.footer.rights, lang)}</span>
-          <span style={{ color: "rgba(255,255,255,0.25)", fontSize: 12 }}>{tr(t.footer.env, lang)}</span>
+      <footer className="border-t border-white/[0.08]">
+        <div className="max-w-[1120px] mx-auto px-6 h-14 flex items-center justify-between">
+          <span className="text-white/25 text-xs">{tr(t.footer.rights, lang)}</span>
+          <span className="text-white/25 text-xs">{tr(t.footer.env, lang)}</span>
         </div>
       </footer>
     </div>

@@ -6,47 +6,35 @@ import { t, tr } from "../translations";
 export default function Nav() {
   const { lang, setLang } = useLanguage();
 
+  const demoUrl = lang === "es"
+    ? "https://rootlenses.com/es/solicitar-demo"
+    : "https://rootlenses.com/en/request-a-demo";
+
   return (
-    <header style={{
-      position: "sticky", top: 0, zIndex: 50,
-      backgroundColor: "rgba(13,13,13,0.80)",
-      backdropFilter: "blur(18px)",
-      WebkitBackdropFilter: "blur(18px)",
-      borderBottom: "1px solid rgba(255,255,255,0.08)",
-    }}>
-      <div style={{
-        maxWidth: 1120, margin: "0 auto", padding: "0 24px",
-        height: 64, display: "flex", alignItems: "center", justifyContent: "space-between",
-      }}>
+    <header className="sticky top-0 z-50 bg-[rgba(13,13,13,0.80)] backdrop-blur-[18px] [-webkit-backdrop-filter:blur(18px)] border-b border-white/[0.08]">
+      <div className="max-w-[1120px] mx-auto px-6 h-16 flex items-center justify-between">
+
         {/* Logo */}
-        <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
+        <a href="/" className="flex items-center no-underline">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/rootlenses-logo.svg" alt="Rootlenses" style={{ height: 30, width: "auto" }} />
+          <img src="/rootlenses-logo.svg" alt="Rootlenses" className="h-[30px] w-auto" />
         </a>
 
         {/* Right side */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div className="flex items-center gap-3">
+
           {/* Language toggle */}
-          <div style={{
-            display: "flex", alignItems: "center",
-            backgroundColor: "rgba(255,255,255,0.07)",
-            border: "1px solid rgba(255,255,255,0.12)",
-            borderRadius: 8, overflow: "hidden",
-          }}>
+          <div className="flex items-center bg-white/[0.07] border border-white/[0.12] rounded-lg overflow-hidden">
             {(["es", "en"] as const).map((l) => (
               <button
                 key={l}
                 onClick={() => setLang(l)}
-                style={{
-                  padding: "6px 14px",
-                  fontSize: 12, fontWeight: 700,
-                  border: "none", cursor: "pointer",
-                  letterSpacing: "0.05em",
-                  textTransform: "uppercase",
-                  transition: "all 0.15s",
-                  backgroundColor: lang === l ? "#F1E104" : "transparent",
-                  color: lang === l ? "#0d0d0d" : "rgba(255,255,255,0.5)",
-                }}
+                className={[
+                  "px-[14px] py-[6px] text-[12px] font-bold border-0 cursor-pointer tracking-[0.05em] uppercase transition-all duration-150",
+                  lang === l
+                    ? "bg-accent text-dark"
+                    : "bg-transparent text-white/50",
+                ].join(" ")}
               >
                 {l}
               </button>
@@ -55,13 +43,10 @@ export default function Nav() {
 
           {/* CTA */}
           <a
-            href="#demo"
-            style={{
-              backgroundColor: "#F1E104", color: "#0d0d0d",
-              fontWeight: 700, fontSize: 13,
-              padding: "8px 20px", borderRadius: 8,
-              textDecoration: "none", letterSpacing: "0.01em",
-            }}
+            href={demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-accent text-dark font-bold text-[13px] px-5 py-2 rounded-lg no-underline tracking-[0.01em]"
           >
             {tr(t.nav.cta, lang)}
           </a>

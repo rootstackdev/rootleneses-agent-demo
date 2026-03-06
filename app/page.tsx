@@ -10,57 +10,42 @@ const AGENT_ID = process.env.NEXT_PUBLIC_AGENT_ID_ROOTSTACK!;
 export default function Home() {
   const { lang } = useLanguage();
 
+  const contactUrl = lang === "es"
+    ? "https://rootlenses.com/es/contactanos"
+    : "https://rootlenses.com/en/contact-us";
+
   return (
-    <div style={{ backgroundColor: "#0d0d0d", minHeight: "100vh", color: "#fff" }}>
+    <div className="bg-dark min-h-screen text-white">
       <Nav />
 
       {/* ── Hero ── */}
-      <section style={{ maxWidth: 1120, margin: "0 auto", padding: "80px 24px 60px" }}>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 64,
-          alignItems: "center",
-        }}>
+      <section className="max-w-[1120px] mx-auto px-6 pt-20 pb-[60px]">
+        <div className="grid grid-cols-2 gap-16 items-center">
+
           {/* Left: copy */}
           <div>
-            <p className="fade-in-up" style={{ color: "#F1E104", fontWeight: 700, fontSize: 13, marginBottom: 20, letterSpacing: "0.02em" }}>
+            <p className="fade-in-up text-accent font-bold text-[13px] mb-5 tracking-[0.02em]">
               {tr(t.hero.eyebrow, lang)}
             </p>
-            <h1
-              className="fade-in-up delay-100"
-              style={{ fontSize: 48, fontWeight: 800, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 24, color: "#fff" }}
-            >
+            <h1 className="fade-in-up delay-100 text-[48px] font-extrabold leading-[1.1] tracking-[-1px] mb-6 text-white">
               {tr(t.hero.heading1, lang)}<br />
-              <span style={{ color: "#F1E104" }}>{tr(t.hero.heading2, lang)}</span>
+              <span className="text-accent">{tr(t.hero.heading2, lang)}</span>
             </h1>
-            <p
-              className="fade-in-up delay-200"
-              style={{ color: "rgba(255,255,255,0.6)", fontSize: 16, lineHeight: 1.7, marginBottom: 36, maxWidth: 440 }}
-            >
+            <p className="fade-in-up delay-200 text-white/60 text-base leading-[1.7] mb-9 max-w-[440px]">
               {tr(t.hero.description, lang)}
             </p>
-            <div className="fade-in-up delay-300" style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+            <div className="fade-in-up delay-300 flex gap-3 items-center flex-wrap">
               <a
-                href="#demo"
-                style={{
-                  backgroundColor: "#F1E104", color: "#0d0d0d",
-                  fontWeight: 700, fontSize: 15,
-                  padding: "13px 28px", borderRadius: 8,
-                  textDecoration: "none", display: "inline-block",
-                }}
+                href={contactUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-accent text-dark font-bold text-[15px] py-[13px] px-7 rounded-lg no-underline inline-block"
               >
                 {tr(t.hero.cta1, lang)}
               </a>
               <a
                 href="#demo"
-                style={{
-                  color: "#fff", fontWeight: 600, fontSize: 15,
-                  padding: "12px 24px", borderRadius: 8,
-                  textDecoration: "none",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  display: "inline-block",
-                }}
+                className="text-white font-semibold text-[15px] py-3 px-6 rounded-lg no-underline border border-white/20 inline-block"
               >
                 {tr(t.hero.cta2, lang)}
               </a>
@@ -68,7 +53,7 @@ export default function Home() {
           </div>
 
           {/* Right: demo card */}
-          <div id="demo" style={{ display: "flex", justifyContent: "center" }}>
+          <div id="demo" className="flex justify-center">
             <VoiceAgentCard
               agentId={AGENT_ID}
               lang={lang}
@@ -91,25 +76,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Powered by strip ── */}
-      <section style={{ borderTop: "1px solid rgba(255,255,255,0.08)", backgroundColor: "#161616", padding: "48px 24px" }}>
-        <div style={{ maxWidth: 1120, margin: "0 auto", textAlign: "center" }}>
-          <p style={{ color: "rgba(255,255,255,0.3)", fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 24 }}>
-            {tr(t.demo.poweredBy, lang)}
-          </p>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 40, flexWrap: "wrap" }}>
-            {["ElevenLabs", "WebRTC", "Next.js", "TypeScript"].map((tech) => (
-              <span key={tech} style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, fontWeight: 600 }}>{tech}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Footer ── */}
-      <footer style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-        <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 24px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ color: "rgba(255,255,255,0.25)", fontSize: 12 }}>{tr(t.footer.rights, lang)}</span>
-          <span style={{ color: "rgba(255,255,255,0.25)", fontSize: 12 }}>{tr(t.footer.env, lang)}</span>
+      <footer className="border-t border-white/[0.08]">
+        <div className="max-w-[1120px] mx-auto px-6 h-14 flex items-center justify-between">
+          <span className="text-white/25 text-xs">{tr(t.footer.rights, lang)}</span>
+          <span className="text-white/25 text-xs">{tr(t.footer.env, lang)}</span>
         </div>
       </footer>
     </div>
