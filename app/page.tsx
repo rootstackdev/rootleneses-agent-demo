@@ -43,12 +43,6 @@ export default function Home() {
               >
                 {tr(t.hero.cta1, lang)}
               </a>
-              <a
-                href="#demo"
-                className="text-white font-semibold text-[15px] py-3 px-6 rounded-lg no-underline border border-white/20 inline-block"
-              >
-                {tr(t.hero.cta2, lang)}
-              </a>
             </div>
           </div>
 
