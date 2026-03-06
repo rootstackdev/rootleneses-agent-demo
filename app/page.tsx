@@ -5,7 +5,7 @@ import VoiceAgentCard from "./components/VoiceAgentCard";
 import { useLanguage } from "./context/LanguageContext";
 import { t, tr } from "./translations";
 
-const AGENT_ID = "agent_0101kk297nazf6crxz4m4n1kygmy";
+const AGENT_ID = process.env.NEXT_PUBLIC_AGENT_ID_ROOTSTACK!;
 
 export default function Home() {
   const { lang } = useLanguage();
